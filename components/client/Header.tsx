@@ -2,13 +2,22 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Phone, Flame, Menu, X } from 'lucide-react';
+import { Phone, Flame, Menu, X, ChevronDown } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [logoError, setLogoError] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+
+  const services = [
+    { name: 'Chimney Repair', href: '/services/chimney-repair' },
+    { name: 'Chimney Inspection', href: '/services/chimney-inspection' },
+    { name: 'Chimney Sweeping', href: '/services/chimney-sweeping' },
+    { name: 'Cap Installation', href: '/services/cap-installation' },
+    { name: 'Gas Logs', href: '/services/gas-logs' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,9 +61,28 @@ const Header: React.FC = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden md:flex lg:flex items-center gap-6">
           <Link href="/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Home</Link>
-          <Link href="/services/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Services</Link>
+
+          {/* Services Dropdown */}
+          <div className="relative group">
+            <button className="text-brand-black font-bold hover:text-brand-red transition-colors flex items-center gap-1">
+              Services
+              <ChevronDown size={16} className="group-hover:text-brand-red transition-colors" />
+            </button>
+            <div className="absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 z-50">
+              {services.map((service) => (
+                <Link
+                  key={service.href}
+                  href={service.href}
+                  className="block px-4 py-2 text-brand-black hover:text-brand-red hover:bg-gray-50 transition-colors font-semibold text-sm"
+                >
+                  {service.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <Link href="/about/" className="text-brand-black font-bold hover:text-brand-red transition-colors">About</Link>
           <Link href="/service-areas/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Service Areas</Link>
         </nav>
@@ -75,7 +103,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Controls */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="flex md:hidden items-center gap-4">
           <a
             href={`tel:${COMPANY_INFO.phoneTel}`}
             className="flex items-center justify-center bg-brand-red text-white p-2 rounded-full shadow-lg"
@@ -94,9 +122,37 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white absolute top-full left-0 right-0 border-t shadow-xl p-4 flex flex-col gap-4">
+        <div className="flex md:hidden bg-white absolute top-full left-0 right-0 border-t shadow-xl p-4 flex-col gap-4 z-50">
           <Link href="/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-          <Link href="/services/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
+
+          {/* Mobile Services Dropdown */}
+          <div className="w-full">
+            <button
+              onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+              className="text-lg font-bold py-2 border-b border-gray-100 w-full text-left flex items-center justify-between"
+            >
+              Services
+              <ChevronDown size={20} className={`transition-transform ${isServicesDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {isServicesDropdownOpen && (
+              <div className="bg-gray-50 rounded mt-2 py-2 w-full">
+                {services.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    className="block px-4 py-2 text-brand-black hover:text-brand-red hover:bg-gray-100 transition-colors font-semibold text-sm"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsServicesDropdownOpen(false);
+                    }}
+                  >
+                    {service.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link href="/about/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
           <Link href="/service-areas/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>Service Areas</Link>
           <a href={`tel:${COMPANY_INFO.phoneTel}`} className="text-lg font-bold py-2 text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Call Now</a>
