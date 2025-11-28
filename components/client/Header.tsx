@@ -29,7 +29,7 @@ const Header: React.FC = () => {
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
           {!logoError ? (
             <img
-              src="/images/top rated logo.png"
+              src="/images/top-rated-logo.png"
               alt={COMPANY_INFO.name}
               className="h-20 md:h-24 w-auto object-contain"
               onError={() => setLogoError(true)}
