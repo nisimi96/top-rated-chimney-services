@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/client/Header';
 import Footer from '@/components/server/Footer';
@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     template: '%s | Top Rated Chimney Services',
   },
   description: 'Expert Chimney Services in Marietta & Atlanta. Call 770-799-6264 for inspections, sweeping, and repairs. Top Rated, Licensed & Insured.',
+};
+
+export const viewport: Viewport = {
   themeColor: '#E31837',
 };
 

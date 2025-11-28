@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss init -p)",
+      "Bash(npm uninstall:*)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 15 npm run:*)",
+      "Bash(timeout 20 npm run dev:*)",
+      "Bash(dir:*)",
+      "Bash(unzip:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(findstr:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(taskkill:*)",
+      "Bash($null)",
+      "Bash(git rm:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
