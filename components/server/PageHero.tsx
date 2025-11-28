@@ -12,7 +12,7 @@ interface PageHeroProps {
 const PageHero: React.FC<PageHeroProps> = ({
   title,
   subtitle,
-  bgImage = '/images/page-hero-bg.jpg',
+  bgImage = '/images/map-bg.jpg',
   videoUrl,
   videos,
 }) => {

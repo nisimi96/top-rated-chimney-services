@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
       {/* Background Media with Rotating Videos */}
       <VideoBackground
         videos={heroVideos}
-        fallbackImage="/images/hero-bg.jpg"
+        fallbackImage="/images/map-bg.jpg"
         duration={15000}
         transitionDuration={1000}
       />
