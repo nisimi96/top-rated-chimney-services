@@ -103,7 +103,7 @@ const InteractiveMap: React.FC = () => {
             Top Rated Chimney Services is proudly based in Atlanta, serving the entire Atlanta metro area and surrounding communities. We're equipped to travel within a <span className="font-bold">60-mile radius from Atlanta</span> to bring certified chimney safety expertise to your doorstep.
           </p>
           <p className="text-base text-gray-600">
-            Whether you are in the heart of Atlanta, the northern suburbs of Alpharetta and Cumming, west towards Dallas, or south towards Peachtree City, our commitment remains the same: Top-Rated service, fair pricing, and absolute safety for your home.
+            Whether you're in the heart of Atlanta, the northern suburbs of Alpharetta and Cumming, west towards Dallas, or south towards Peachtree City, our commitment remains the same: Top-Rated service, fair pricing, and absolute safety for your home.
           </p>
         </div>
 

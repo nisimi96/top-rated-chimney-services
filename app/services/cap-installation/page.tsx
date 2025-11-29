@@ -27,7 +27,7 @@ export default function CapInstallation() {
             {/* Main content */}
             <div className="lg:col-span-2">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-black mb-6 lg:mb-8 leading-tight">
-                Expert Chimney Cap Installation in Marietta & Atlanta
+                Expert Chimney Cap Installation in Atlanta and Up to 60 Miles Away
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 lg:mb-8 leading-relaxed">
                 A chimney without a cap is like a house without a roof. It's an open hole directly into your home. At {COMPANY_INFO.name}, we install premium custom-fitted chimney caps and chase covers that provide the ultimate defense against the elements.

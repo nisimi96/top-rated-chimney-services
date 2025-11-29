@@ -27,7 +27,7 @@ export default function GasLogs() {
             {/* Main content */}
             <div className="lg:col-span-2">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-black mb-6 lg:mb-8 leading-tight">
-                Gas Log Installation & Service in Marietta, GA
+                Gas Log Installation & Service in Atlanta, GA
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 lg:mb-8 leading-relaxed">
                 Enjoy the warmth and ambiance of a fire with the simple flip of a switch. At {COMPANY_INFO.name}, we specialize in the installation and maintenance of premium gas log sets for homeowners across the Greater Atlanta area.
@@ -44,7 +44,7 @@ export default function GasLogs() {
                   </div>
                   <h3 className="text-lg lg:text-xl font-bold text-brand-black mb-3 lg:mb-4">New Installations</h3>
                   <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
-                    We install top-quality Vented and Vent-Free gas log sets. We handle the gas line connection, burner placement, and ember bed styling for a realistic look.
+                    We install top-quality Vented and Vent-Free gas log sets. We handle all gas line connections, burner placement, and ember bed styling for a realistic, professional appearance.
                   </p>
                 </div>
 

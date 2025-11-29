@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Professional Chimney Sweeping | Atlanta Metro | Creosote Removal',
   description: 'Expert creosote removal and deep cleaning for Greater Atlanta homes. NFPA-certified chimney sweeping services.',
   alternates: {
-    canonical: 'https://topratedchimney.com/services/chimney-sweeping',
+    canonical: 'https://topratedchimney.com/services/chimney-sweeping/',
   },
 };
 
@@ -41,7 +41,7 @@ export default function ChimneySweeping() {
                   <div>
                     <h3 className="text-xl font-bold text-brand-black mb-2">Why is Creosote Dangerous?</h3>
                     <p className="text-gray-700">
-                      Creosote is a highly flammable substance that builds up inside your chimney flue every time you burn wood. It is the #1 cause of chimney fires. Regular sweeping is the only way to effectively remove it and ensure safe operation.
+                      Creosote is a highly flammable substance that builds up inside your chimney flue every time you burn wood. It is the number one cause of chimney fires. Regular sweeping is the only way to effectively remove it and ensure safe operation.
                     </p>
                   </div>
                 </div>

@@ -77,7 +77,7 @@ const Services: React.FC = () => {
             <h3 className="text-2xl font-bold text-white mb-4">Need Something Else?</h3>
             <p className="text-gray-300 mb-8">We handle all chimney and fireplace related needs.</p>
             <a
-              href="tel:7707996264"
+              href={`tel:${COMPANY_INFO.phoneTel}`}
               className="w-full bg-brand-red text-white py-4 rounded-lg font-bold hover:bg-white hover:text-brand-red transition-colors"
             >
               Ask an Expert

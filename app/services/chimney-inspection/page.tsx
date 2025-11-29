@@ -106,7 +106,7 @@ export default function ChimneyInspection() {
                   <div>
                     <h3 className="text-2xl lg:text-3xl font-bold text-brand-black mb-2 lg:mb-4">Buying a Home in Atlanta?</h3>
                     <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                      Standard home inspectors usually <strong>do not</strong> perform Level 2 chimney inspections or use internal cameras. Do not inherit a costly fire hazard or structural repair bill. Schedule a dedicated chimney inspection before closing.
+                      Unlike standard home inspectors, we perform comprehensive Level 2 chimney inspections with internal cameras. Don't inherit a costly fire hazard or structural repair bill—schedule a dedicated chimney inspection before closing.
                     </p>
                   </div>
                 </div>
