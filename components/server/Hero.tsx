@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
 
           <p className="text-xl md:text-2xl text-gray-100 mb-8 font-medium drop-shadow-md">
             Professional Inspections, Sweeping, and Repairs. <br className="hidden md:block"/>
-            Serving <span className="text-white font-bold underline decoration-brand-red decoration-4 underline-offset-4">Entire Atlanta Metro Area</span> (60-Mile Radius).
+            Serving <span className="text-white font-bold underline decoration-brand-red decoration-4 underline-offset-4">Entire Metro Atlanta Area</span> (60-Mile Radius).
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">

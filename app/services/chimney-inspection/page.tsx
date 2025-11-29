@@ -27,7 +27,7 @@ export default function ChimneyInspection() {
             {/* Main content */}
             <div className="lg:col-span-2">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-black mb-6 lg:mb-8 leading-tight">
-                Professional Chimney Inspections in Atlanta Metro
+                Professional Chimney Inspections in Metro Atlanta
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 lg:mb-8 leading-relaxed">
                 The National Fire Protection Association (NFPA) recommends an annual chimney inspection for every fireplace, wood stove, or gas log set. At {COMPANY_INFO.name}, we use advanced camera technology to look deep inside your flue system, identifying hidden hazards that could lead to carbon monoxide leaks or chimney fires.

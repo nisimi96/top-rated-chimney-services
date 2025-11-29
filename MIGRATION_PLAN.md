@@ -22,7 +22,7 @@ This plan outlines the migration of the Top Rated Chimney Services website from 
 - 9 pages (all static content)
 - 9 components (3 client, 6 server capable)
 - No API calls needed
-- Heavy local SEO focus for Atlanta metro area
+- Heavy local SEO focus for Metro Atlanta area
 - Deploy to Hostinger or customer's choice of hosting
 - All images self-hosted in project
 
@@ -357,7 +357,7 @@ export const metadata: Metadata = {
    - Title: "Professional Chimney Services | Cleaning, Repair & Inspection"
 
 4. **Chimney Sweeping:** `pages/Sweeping.tsx` → `src/app/services/chimney-sweeping/page.tsx`
-   - Title: "Professional Chimney Sweeping | Atlanta Metro"
+   - Title: "Professional Chimney Sweeping | Metro Atlanta"
 
 5. **Chimney Repair:** `pages/Repairs.tsx` → `src/app/services/chimney-repair/page.tsx`
    - Title: "Chimney Repair & Masonry | Atlanta & North GA"
@@ -372,7 +372,7 @@ export const metadata: Metadata = {
    - Title: "Gas Log Installation & Repair | Marietta GA"
 
 9. **Service Areas:** `pages/ServiceAreas.tsx` → `src/app/service-areas/page.tsx`
-   - Title: "Service Areas | Greater Atlanta Metro Chimney Services"
+   - Title: "Service Areas | Greater Metro Atlanta Chimney Services"
 
 ---
 

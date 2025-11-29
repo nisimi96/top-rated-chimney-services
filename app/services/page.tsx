@@ -6,7 +6,7 @@ import { COMPANY_INFO } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Professional Chimney Services | Cleaning, Repair & Inspection',
-  description: 'Comprehensive chimney care including sweeping, repairs, inspections, and installations. Serving Atlanta metro area.',
+  description: 'Comprehensive chimney care including sweeping, repairs, inspections, and installations. Serving Metro Atlanta area.',
   alternates: {
     canonical: 'https://topratedchimney.com/services/',
   },

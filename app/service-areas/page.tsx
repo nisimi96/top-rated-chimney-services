@@ -5,7 +5,7 @@ import { Phone } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Service Areas | Greater Atlanta Metro Chimney Services',
+  title: 'Service Areas | Greater Metro Atlanta Chimney Services',
   description: 'We proudly serve Marietta, Atlanta, Alpharetta, Roswell, Sandy Springs, and 60-mile radius.',
   alternates: {
     canonical: 'https://topratedchimney.com/service-areas',
@@ -30,7 +30,7 @@ export default function ServiceAreas() {
     <>
       <PageHero
         title="Service Areas"
-        subtitle="Serving the entire Greater Atlanta Metro Area within a 60-mile radius of Marietta."
+        subtitle="Serving the entire Greater Metro Atlanta Area within a 60-mile radius of Marietta."
         bgImage="/images/placeholder.jpg"
       />
 

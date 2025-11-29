@@ -5,7 +5,7 @@ import { Phone, ShieldAlert, CheckCircle2, Calendar, Sparkles } from 'lucide-rea
 import { COMPANY_INFO } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Professional Chimney Sweeping | Atlanta Metro | Creosote Removal',
+  title: 'Professional Chimney Sweeping | Metro Atlanta | Creosote Removal',
   description: 'Expert creosote removal and deep cleaning for Greater Atlanta homes. NFPA-certified chimney sweeping services.',
   alternates: {
     canonical: 'https://topratedchimney.com/services/chimney-sweeping/',
