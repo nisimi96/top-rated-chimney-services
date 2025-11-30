@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     template: '%s | Top Rated Chimney Services',
   },
   description: 'Expert Chimney Services in Marietta & Atlanta. Call 770-799-6264 for inspections, sweeping, and repairs. Top Rated, Licensed & Insured.',
+  icons: {
+    icon: '/favicon-32x32.png',
+  },
 };
 
 export const viewport: Viewport = {
