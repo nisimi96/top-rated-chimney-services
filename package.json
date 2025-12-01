@@ -12,7 +12,10 @@
     "@react-google-maps/api": "^2.20.7",
     "@react-oauth/google": "^0.12.2",
     "@tailwindcss/postcss": "^4.1.17",
+    "@types/next-auth": "^3.13.0",
     "@types/nodemailer": "^7.0.4",
+    "@types/node": "^22.19.1",
+    "@types/react": "^19.2.7",
     "autoprefixer": "^10.4.22",
     "lucide-react": "^0.555.0",
     "next": "^16.0.5",
@@ -23,12 +26,8 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.67.0",
     "tailwindcss": "^4.1.17",
+    "typescript": "~5.8.2",
     "zod": "^4.1.13"
   },
-  "devDependencies": {
-    "@types/next-auth": "^3.13.0",
-    "@types/node": "^22.19.1",
-    "@types/react": "^19.2.7",
-    "typescript": "~5.8.2"
-  }
+  "devDependencies": {}
 }
