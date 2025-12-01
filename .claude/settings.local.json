@@ -21,7 +21,15 @@
       "Bash(git push:*)",
       "Bash(taskkill:*)",
       "Bash($null)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(echo:*)",
+      "Bash(node scripts/setup-client.js:*)",
+      "Bash(npm run:*)",
+      "Bash(node scripts/convert-to-template.js:*)",
+      "Bash(node scripts/validate-config.js:*)",
+      "Bash(git restore:*)",
+      "Bash(find:*)",
+      "Bash(npm ls:*)"
     ],
     "deny": [],
     "ask": []

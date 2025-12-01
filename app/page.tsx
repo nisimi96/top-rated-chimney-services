@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Hero from '@/components/server/Hero';
 import TrustBar from '@/components/server/TrustBar';
 import Services from '@/components/server/Services';
+import Testimonials from '@/components/server/Testimonials';
 import Location from '@/components/server/Location';
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <Services />
+      <Testimonials />
 
       {/* Urgent CTA Break */}
       <section className="bg-brand-red py-12 text-center text-white">

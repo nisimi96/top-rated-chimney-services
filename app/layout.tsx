@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/client/Header';
 import Footer from '@/components/server/Footer';
 import FloatingCTA from '@/components/client/FloatingCTA';
+import SessionProvider from '@/components/client/SessionProvider';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -35,10 +36,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body suppressHydrationWarning className="min-h-screen bg-white font-sans text-slate-900 selection:bg-brand-red selection:text-white flex flex-col">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <FloatingCTA />
+        <SessionProvider>
+          <Header />
+          <main className="grow">{children}</main>
+          <Footer />
+          <FloatingCTA />
+        </SessionProvider>
       </body>
     </html>
   );

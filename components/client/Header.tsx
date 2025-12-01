@@ -85,6 +85,7 @@ const Header: React.FC = () => {
 
           <Link href="/about/" className="text-brand-black font-bold hover:text-brand-red transition-colors">About</Link>
           <Link href="/service-areas/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Service Areas</Link>
+          <Link href="/contact/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Contact</Link>
         </nav>
 
         {/* Desktop Call to Action */}
@@ -155,6 +156,7 @@ const Header: React.FC = () => {
 
           <Link href="/about/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
           <Link href="/service-areas/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>Service Areas</Link>
+          <Link href="/contact/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
           <a href={`tel:${COMPANY_INFO.phoneTel}`} className="text-lg font-bold py-2 text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Call Now</a>
         </div>
       )}
