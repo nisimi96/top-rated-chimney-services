@@ -6,6 +6,8 @@ import { Mail, Phone, LogOut } from 'lucide-react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { COMPANY_INFO } from '@/lib/constants';
 
+export const dynamic = 'force-dynamic';
+
 interface ContactFormData {
   name: string;
   email: string;
