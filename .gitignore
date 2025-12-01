@@ -12,11 +12,17 @@ dist
 dist-ssr
 *.local
 
+# Environment variables - NEVER commit these
+.env
+.env.local
+.env.*.local
+.env.production.local
+
 # Next.js
 .next/
 out/
 
-# Editor directories and files
+# IDE & Editor directories
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -26,3 +32,14 @@ out/
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Setup/Documentation files (local development only)
+CONTACT_FORM_SIMPLE_SETUP.md
+GMAIL_OAUTH_SETUP.md
+GMAIL_OAUTH_SETUP_FINAL.md
+GMAIL_OAUTH_SETUP_FINAL.md
+SETUP_SUMMARY.md
