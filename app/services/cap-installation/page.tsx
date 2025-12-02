@@ -1,20 +1,68 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import PageHero from '@/components/server/PageHero';
 import Location from '@/components/server/Location';
 import { Phone, Umbrella, Cat, ShieldCheck, CloudRain, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schemas';
+
+const serviceData = {
+  name: 'Chimney Cap Installation',
+  description: 'High-quality stainless steel chimney cap installation. Protect your home from water damage, animals, and debris with professional cap and chase cover installation.',
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://topratedchimney.com/' },
+  { name: 'Services', url: 'https://topratedchimney.com/services/' },
+  { name: 'Cap Installation', url: 'https://topratedchimney.com/services/cap-installation/' },
+];
 
 export const metadata: Metadata = {
   title: 'Chimney Caps & Chase Covers | Marietta & Atlanta Installation',
-  description: 'High-quality stainless steel chimney cap installation. Keep animals, debris, and rain out of your chimney.',
+  description: serviceData.description,
+  keywords: ['chimney cap installation', 'chase cover', 'stainless steel chimney cap', 'Atlanta chimney cap', 'animal prevention'],
   alternates: {
     canonical: 'https://topratedchimney.com/services/cap-installation/',
+  },
+  openGraph: {
+    title: 'Chimney Cap & Chase Cover Installation | Atlanta',
+    description: serviceData.description,
+    url: 'https://topratedchimney.com/services/cap-installation/',
+    siteName: 'Top Rated Chimney Services',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://topratedchimney.com/og-service-caps.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Professional chimney cap installation in Atlanta',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Chimney Cap Installation | Atlanta',
+    description: serviceData.description,
+    images: ['https://topratedchimney.com/og-service-caps.jpg'],
   },
 };
 
 export default function CapInstallation() {
   return (
     <>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema(serviceData.name, serviceData.description)),
+        }}
+      />
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema(breadcrumbs)),
+        }}
+      />
       <PageHero
         title="Chimney Caps & Chase Covers"
         subtitle="Protect your home from water damage and wildlife with high-quality stainless steel installations."

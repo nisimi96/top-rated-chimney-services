@@ -1,20 +1,68 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import PageHero from '@/components/server/PageHero';
 import Location from '@/components/server/Location';
 import { Phone, Hammer, Droplets, Construction, BrickWall, AlertTriangle, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schemas';
+
+const serviceData = {
+  name: 'Chimney Repair',
+  description: 'Expert chimney repair, masonry work, tuckpointing, and crown rebuilding. Professional restoration and leak resolution for Atlanta & North GA.',
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://topratedchimney.com/' },
+  { name: 'Services', url: 'https://topratedchimney.com/services/' },
+  { name: 'Chimney Repair', url: 'https://topratedchimney.com/services/chimney-repair/' },
+];
 
 export const metadata: Metadata = {
   title: 'Chimney Repair & Masonry | Atlanta & North GA',
-  description: 'Expert chimney repair, masonry work, tuckpointing, and crown rebuilding. Serving Atlanta, Marietta, Roswell, Alpharetta.',
+  description: serviceData.description,
+  keywords: ['chimney repair', 'masonry repair', 'tuckpointing', 'Atlanta chimney repair', 'crown rebuilding'],
   alternates: {
     canonical: 'https://topratedchimney.com/services/chimney-repair/',
+  },
+  openGraph: {
+    title: 'Expert Chimney Repair & Masonry | Atlanta',
+    description: serviceData.description,
+    url: 'https://topratedchimney.com/services/chimney-repair/',
+    siteName: 'Top Rated Chimney Services',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://topratedchimney.com/og-service-repair.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Professional chimney repair and masonry work in Atlanta',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Expert Chimney Repair | Atlanta',
+    description: serviceData.description,
+    images: ['https://topratedchimney.com/og-service-repair.jpg'],
   },
 };
 
 export default function ChimneyRepair() {
   return (
     <>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema(serviceData.name, serviceData.description)),
+        }}
+      />
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema(breadcrumbs)),
+        }}
+      />
       <PageHero
         title="Chimney Repair & Masonry"
         subtitle="Expert restoration, leak resolution, and structural repairs for Atlanta & North GA."

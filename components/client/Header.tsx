@@ -66,9 +66,13 @@ const Header: React.FC = () => {
 
           {/* Services Dropdown */}
           <div className="relative group">
-            <button className="text-brand-black font-bold hover:text-brand-red transition-colors flex items-center gap-1">
+            <button
+              className="text-brand-black font-bold hover:text-brand-red transition-colors flex items-center gap-1"
+              aria-label="Services submenu"
+              aria-expanded="false"
+            >
               Services
-              <ChevronDown size={16} className="group-hover:text-brand-red transition-colors" />
+              <ChevronDown size={16} className="group-hover:text-brand-red transition-colors" aria-hidden="true" />
             </button>
             <div className="absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 z-50">
               {services.map((service) => (
@@ -110,13 +114,15 @@ const Header: React.FC = () => {
             className="flex items-center justify-center bg-brand-red text-white p-2 rounded-full shadow-lg"
             aria-label="Call Now"
           >
-            <Phone size={24} />
+            <Phone size={24} aria-hidden="true" />
           </a>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-brand-black p-1"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
           </button>
         </div>
       </div>

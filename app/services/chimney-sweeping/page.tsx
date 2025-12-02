@@ -1,20 +1,68 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import PageHero from '@/components/server/PageHero';
 import Location from '@/components/server/Location';
 import { Phone, ShieldAlert, CheckCircle2, Calendar, Sparkles } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schemas';
+
+const serviceData = {
+  name: 'Chimney Sweeping',
+  description: 'Expert creosote removal and deep cleaning for Greater Atlanta homes. NFPA-certified chimney sweeping services to prevent chimney fires and ensure safe operation.',
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://topratedchimney.com/' },
+  { name: 'Services', url: 'https://topratedchimney.com/services/' },
+  { name: 'Chimney Sweeping', url: 'https://topratedchimney.com/services/chimney-sweeping/' },
+];
 
 export const metadata: Metadata = {
   title: 'Professional Chimney Sweeping | Metro Atlanta | Creosote Removal',
-  description: 'Expert creosote removal and deep cleaning for Greater Atlanta homes. NFPA-certified chimney sweeping services.',
+  description: serviceData.description,
+  keywords: ['chimney sweeping', 'creosote removal', 'chimney cleaning', 'Atlanta chimney sweep', 'Marietta chimney cleaner'],
   alternates: {
     canonical: 'https://topratedchimney.com/services/chimney-sweeping/',
+  },
+  openGraph: {
+    title: 'Professional Chimney Sweeping | Creosote Removal',
+    description: serviceData.description,
+    url: 'https://topratedchimney.com/services/chimney-sweeping/',
+    siteName: 'Top Rated Chimney Services',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://topratedchimney.com/og-service-sweep.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Professional chimney sweeping service in Atlanta',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Professional Chimney Sweeping | Atlanta',
+    description: serviceData.description,
+    images: ['https://topratedchimney.com/og-service-sweep.jpg'],
   },
 };
 
 export default function ChimneySweeping() {
   return (
     <>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema(serviceData.name, serviceData.description)),
+        }}
+      />
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema(breadcrumbs)),
+        }}
+      />
       <PageHero
         title="Professional Chimney Sweeping"
         subtitle="Expert creosote removal and deep cleaning for Greater Atlanta homes."
@@ -37,7 +85,7 @@ export default function ChimneySweeping() {
 
               <div className="bg-red-50 border-l-4 border-brand-red p-6 rounded-r-lg mb-10">
                 <div className="flex items-start gap-3">
-                  <ShieldAlert className="text-brand-red shrink-0" size={28} />
+                  <ShieldAlert className="text-brand-red shrink-0" size={28} aria-hidden="true" />
                   <div>
                     <h3 className="text-xl font-bold text-brand-black mb-2">Why is Creosote Dangerous?</h3>
                     <p className="text-gray-700">
@@ -50,19 +98,19 @@ export default function ChimneySweeping() {
               <h3 className="text-2xl font-bold text-brand-black mb-6">Our Cleaning Process</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-brand-red shrink-0" size={24} />
+                  <CheckCircle2 className="text-brand-red shrink-0" size={24} aria-hidden="true" />
                   <p className="text-gray-700"><strong>Inspection:</strong> We start with a visual check to assess creosote levels.</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-brand-red shrink-0" size={24} />
+                  <CheckCircle2 className="text-brand-red shrink-0" size={24} aria-hidden="true" />
                   <p className="text-gray-700"><strong>Protection:</strong> We lay down drop cloths and seal the fireplace opening.</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-brand-red shrink-0" size={24} />
+                  <CheckCircle2 className="text-brand-red shrink-0" size={24} aria-hidden="true" />
                   <p className="text-gray-700"><strong>Sweeping:</strong> High-powered brushes scrub the flue from top to bottom.</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-brand-red shrink-0" size={24} />
+                  <CheckCircle2 className="text-brand-red shrink-0" size={24} aria-hidden="true" />
                   <p className="text-gray-700"><strong>HEPA Vacuuming:</strong> All dust and soot are instantly captured.</p>
                 </div>
               </div>
@@ -80,7 +128,7 @@ export default function ChimneySweeping() {
                     href={`tel:${COMPANY_INFO.phoneTel}`}
                     className="flex items-center justify-center gap-2 bg-brand-red text-white py-4 rounded-lg font-bold text-lg hover:bg-red-700 transition-colors shadow-md animate-pulse"
                   >
-                    <Phone size={20} />
+                    <Phone size={20} aria-hidden="true" />
                     <span>Call {COMPANY_INFO.phoneDisplay}</span>
                   </a>
                   <div className="text-center text-sm text-gray-500 mt-2">
@@ -102,7 +150,7 @@ export default function ChimneySweeping() {
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex items-start gap-3 mb-2">
-                <Calendar className="text-brand-red" size={24} />
+                <Calendar className="text-brand-red" size={24} aria-hidden="true" />
                 <h3 className="text-xl font-bold text-brand-black">How often should I clean my chimney?</h3>
               </div>
               <p className="text-gray-600 ml-9">
@@ -112,7 +160,7 @@ export default function ChimneySweeping() {
 
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex items-start gap-3 mb-2">
-                <Sparkles className="text-brand-red" size={24} />
+                <Sparkles className="text-brand-red" size={24} aria-hidden="true" />
                 <h3 className="text-xl font-bold text-brand-black">Will it make a mess in my house?</h3>
               </div>
               <p className="text-gray-600 ml-9">

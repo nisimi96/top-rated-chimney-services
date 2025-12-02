@@ -1,0 +1,17 @@
+# robots.txt for Top Rated Chimney Services
+
+# Allow all bots
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.env
+Disallow: /.env.local
+
+# Sitemap
+Sitemap: https://topratedchimney.com/sitemap.xml
+
+# Crawl delay to be respectful (in seconds)
+Crawl-delay: 1

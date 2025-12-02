@@ -63,12 +63,17 @@ const Services: React.FC = () => {
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 border-b-4 border-transparent hover:border-brand-red group flex flex-col"
             >
               <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red transition-colors duration-300">
-                <service.icon size={32} className="text-brand-red group-hover:text-white transition-colors duration-300" />
+                <service.icon
+                  size={32}
+                  className="text-brand-red group-hover:text-white transition-colors duration-300"
+                  aria-hidden="true"
+                />
               </div>
               <h3 className="text-xl font-bold text-brand-black mb-3">{service.title}</h3>
               <p className="text-gray-600 leading-relaxed mb-6 flex-grow">{service.description}</p>
               <div className="text-brand-red font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
-                Learn More <ArrowRight size={16} />
+                Learn More{' '}
+                <ArrowRight size={16} aria-hidden="true" />
               </div>
             </Link>
           ))}

@@ -42,12 +42,13 @@ const testimonials: Testimonial[] = [
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1" role="img" aria-label={`${rating} out of 5 stars`}>
       {[...Array(rating)].map((_, i) => (
         <Star
           key={i}
           size={16}
           className="fill-yellow-400 text-yellow-400"
+          aria-hidden="true"
         />
       ))}
     </div>

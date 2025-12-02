@@ -1,9 +1,40 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { Mail, Phone } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 import ContactForm from '@/components/client/ContactForm';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Contact Us | Top Rated Chimney Services | Marietta, GA',
+  description: 'Get in touch with Top Rated Chimney Services. Call 770-799-6264 or fill out our contact form for prompt service in Atlanta and Marietta.',
+  alternates: {
+    canonical: 'https://topratedchimney.com/contact/',
+  },
+  openGraph: {
+    title: 'Contact Top Rated Chimney Services',
+    description: 'Get in touch with our team. Call 770-799-6264 for expert chimney services in Atlanta & Marietta.',
+    url: 'https://topratedchimney.com/contact/',
+    siteName: 'Top Rated Chimney Services',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://topratedchimney.com/og-contact.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Contact Top Rated Chimney Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Us | Top Rated Chimney Services',
+    description: 'Get in touch with our team. Call 770-799-6264 for expert chimney services.',
+    images: ['https://topratedchimney.com/og-contact.jpg'],
+  },
+};
 
 export default function ContactPage() {
   return (
@@ -25,7 +56,7 @@ export default function ContactPage() {
             {/* Contact Info Cards */}
             <div className="bg-gray-50 rounded-xl p-8 border-l-4 border-brand-red">
               <div className="flex items-center gap-4 mb-4">
-                <Phone className="text-brand-red" size={28} />
+                <Phone className="text-brand-red" size={28} aria-hidden="true" />
                 <h3 className="text-xl font-bold text-brand-black">Call Us</h3>
               </div>
               <p className="text-gray-600 mb-2">Available Monday - Saturday</p>
@@ -39,7 +70,7 @@ export default function ContactPage() {
 
             <div className="bg-gray-50 rounded-xl p-8 border-l-4 border-brand-red">
               <div className="flex items-center gap-4 mb-4">
-                <Mail className="text-brand-red" size={28} />
+                <Mail className="text-brand-red" size={28} aria-hidden="true" />
                 <h3 className="text-xl font-bold text-brand-black">Email Us</h3>
               </div>
               <p className="text-gray-600 mb-2">Response within 24 hours</p>

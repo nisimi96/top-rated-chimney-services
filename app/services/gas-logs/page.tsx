@@ -1,20 +1,68 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import PageHero from '@/components/server/PageHero';
 import Location from '@/components/server/Location';
 import { Phone, Flame, Wrench, Thermometer, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schemas';
+
+const serviceData = {
+  name: 'Gas Logs & Fireplaces',
+  description: 'Professional gas log installation, repair, and safety services for vented and vent-free gas log sets. Enjoy a cozy fire with the flip of a switch.',
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://topratedchimney.com/' },
+  { name: 'Services', url: 'https://topratedchimney.com/services/' },
+  { name: 'Gas Logs', url: 'https://topratedchimney.com/services/gas-logs/' },
+];
 
 export const metadata: Metadata = {
   title: 'Gas Log Installation & Repair | Marietta GA | Vented & Vent-Free',
-  description: 'Professional gas log installation and service. Enjoy a cozy fire with the flip of a switch.',
+  description: serviceData.description,
+  keywords: ['gas log installation', 'gas fireplace', 'vented gas logs', 'vent-free gas logs', 'gas log repair'],
   alternates: {
     canonical: 'https://topratedchimney.com/services/gas-logs/',
+  },
+  openGraph: {
+    title: 'Gas Log Installation & Repair | Marietta, GA',
+    description: serviceData.description,
+    url: 'https://topratedchimney.com/services/gas-logs/',
+    siteName: 'Top Rated Chimney Services',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://topratedchimney.com/og-service-gaslogs.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Professional gas log installation and repair in Atlanta',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gas Log Installation & Repair | Atlanta',
+    description: serviceData.description,
+    images: ['https://topratedchimney.com/og-service-gaslogs.jpg'],
   },
 };
 
 export default function GasLogs() {
   return (
     <>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema(serviceData.name, serviceData.description)),
+        }}
+      />
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema(breadcrumbs)),
+        }}
+      />
       <PageHero
         title="Gas Logs & Fireplaces"
         subtitle="Installation, repair, and safety services for vented and vent-free gas log sets."

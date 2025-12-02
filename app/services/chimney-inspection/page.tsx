@@ -1,20 +1,68 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import PageHero from '@/components/server/PageHero';
 import Location from '@/components/server/Location';
 import { Phone, Search, FileCheck, Home, AlertOctagon, CheckCircle2 } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schemas';
+
+const serviceData = {
+  name: 'Chimney Inspection',
+  description: 'NFPA 211 compliant chimney inspections using advanced camera technology. Level 1, 2, & 3 inspections perfect for real estate transactions and annual safety checks.',
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://topratedchimney.com/' },
+  { name: 'Services', url: 'https://topratedchimney.com/services/' },
+  { name: 'Chimney Inspection', url: 'https://topratedchimney.com/services/chimney-inspection/' },
+];
 
 export const metadata: Metadata = {
   title: 'Chimney Inspections Atlanta | Level 1, 2 & 3 | Real Estate',
-  description: 'NFPA 211 compliant chimney inspections using advanced camera technology. Perfect for real estate transactions.',
+  description: serviceData.description,
+  keywords: ['chimney inspection', 'Level 1 inspection', 'Level 2 inspection', 'Atlanta chimney inspector', 'real estate inspection'],
   alternates: {
     canonical: 'https://topratedchimney.com/services/chimney-inspection/',
+  },
+  openGraph: {
+    title: 'Professional Chimney Inspections | Atlanta',
+    description: serviceData.description,
+    url: 'https://topratedchimney.com/services/chimney-inspection/',
+    siteName: 'Top Rated Chimney Services',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: 'https://topratedchimney.com/og-service-inspection.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Professional chimney inspection service in Atlanta',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Professional Chimney Inspections | Atlanta',
+    description: serviceData.description,
+    images: ['https://topratedchimney.com/og-service-inspection.jpg'],
   },
 };
 
 export default function ChimneyInspection() {
   return (
     <>
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema(serviceData.name, serviceData.description)),
+        }}
+      />
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema(breadcrumbs)),
+        }}
+      />
       <PageHero
         title="Chimney Safety Inspections"
         subtitle="Certified Level 1, 2, & 3 inspections for real estate transactions and annual safety."
