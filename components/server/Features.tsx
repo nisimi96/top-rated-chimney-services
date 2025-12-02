@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 const Features: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(true);
 
   const slides = [
     {
@@ -28,10 +29,23 @@ const Features: React.FC = () => {
   ];
 
   useEffect(() => {
+    // Detect mobile on mount and resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Auto-rotate carousel slides
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000); // Change slide every 5 seconds
-    return () => clearInterval(interval);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      clearInterval(interval);
+    };
   }, [slides.length]);
   return (
     <section
@@ -76,18 +90,32 @@ const Features: React.FC = () => {
                 }`}
               >
                 {slide.type === 'video' ? (
-                  <video
-                    className="w-full h-full object-cover"
-                    autoPlay={index === currentSlide}
-                    muted
-                    loop
-                    playsInline
-                    aria-label={slide.alt}
-                    title={slide.description}
-                  >
-                    <source src={slide.src} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  <>
+                    {/* Fallback Image */}
+                    <Image
+                      src="/images/fireplace-image.webp"
+                      alt="Fireplace installation"
+                      fill
+                      className="w-full h-full object-cover"
+                      priority={index === 0}
+                    />
+                    {/* Video - loads only on desktop to improve mobile performance */}
+                    {!isMobile && (
+                      <video
+                        className="w-full h-full object-cover absolute inset-0"
+                        autoPlay={index === currentSlide}
+                        muted
+                        loop
+                        playsInline
+                        preload="none"
+                        aria-label={slide.alt}
+                        title={slide.description}
+                      >
+                        <source src={slide.src} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
+                  </>
                 ) : (
                   <Image
                     src={slide.src}

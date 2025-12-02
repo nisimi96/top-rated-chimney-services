@@ -3,18 +3,20 @@
 import React, { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { useThrottle } from '@/lib/hooks';
 
 const FloatingCTA: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleScroll = useThrottle(() => {
+    // Show after scrolling past header (100px)
+    setIsVisible(window.scrollY > 100);
+  }, 150);
+
   useEffect(() => {
-    const handleScroll = () => {
-      // Show after scrolling past header (100px)
-      setIsVisible(window.scrollY > 100);
-    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   if (!isVisible) return null;
 

@@ -68,35 +68,45 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
         }}
       />
 
-      {/* Video Elements */}
-      {videos.map((videoUrl, index) => (
-        <video
-          key={index}
-          ref={(el) => {
-            videoRefs.current[index] = el;
-          }}
-          autoPlay={index === 0}
-          loop={false}
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-10 transition-opacity"
-          style={{
-            opacity: currentVideoIndex === index ? 1 : 0,
-            transitionDuration: `${transitionDuration}ms`,
-            transitionProperty: 'opacity',
-          }}
-          poster={posterImage || fallbackImage}
-          onEnded={() => {
-            // When current video ends, move to next
-            if (currentVideoIndex === index) {
-              setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
-            }
-          }}
-        >
-          <source src={videoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      ))}
+      {/* Video Elements - Only load current and next video for performance */}
+      {videos.map((videoUrl, index) => {
+        // Only render current and next video to reduce memory usage
+        const isCurrentOrNext = index === currentVideoIndex || index === (currentVideoIndex + 1) % videos.length;
+
+        if (!isCurrentOrNext) {
+          return null;
+        }
+
+        return (
+          <video
+            key={index}
+            ref={(el) => {
+              videoRefs.current[index] = el;
+            }}
+            autoPlay={index === currentVideoIndex}
+            loop={false}
+            muted
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover z-10 transition-opacity"
+            style={{
+              opacity: currentVideoIndex === index ? 1 : 0,
+              transitionDuration: `${transitionDuration}ms`,
+              transitionProperty: 'opacity',
+            }}
+            poster={posterImage || fallbackImage}
+            onEnded={() => {
+              // When current video ends, move to next
+              if (currentVideoIndex === index) {
+                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
+              }
+            }}
+          >
+            <source src={videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        );
+      })}
 
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30 z-20"></div>

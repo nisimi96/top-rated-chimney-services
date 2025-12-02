@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { COMPANY_INFO } from '@/lib/constants';
 
 const Footer: React.FC = () => {
@@ -11,9 +12,11 @@ const Footer: React.FC = () => {
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
               <div className="bg-brand-black p-3 rounded-lg inline-block">
-                <img
+                <Image
                   src="/images/top-rate-logo-footer.png"
                   alt={COMPANY_INFO.name}
+                  width={128}
+                  height={128}
                   className="h-24 md:h-32 w-auto object-contain"
                 />
               </div>

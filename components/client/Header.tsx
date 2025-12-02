@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Flame, Menu, X, ChevronDown } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { useThrottle } from '@/lib/hooks';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,13 +21,14 @@ const Header: React.FC = () => {
     { name: 'Gas Logs', href: '/services/gas-logs' },
   ];
 
+  const handleScroll = useThrottle(() => {
+    setIsScrolled(window.scrollY > 20);
+  }, 150);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   return (
     <header
@@ -37,11 +40,14 @@ const Header: React.FC = () => {
         {/* Logo Section */}
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
           {!logoError ? (
-            <img
+            <Image
               src="/images/top-rated-logo.png"
               alt={COMPANY_INFO.name}
+              width={96}
+              height={96}
               className="h-20 md:h-24 w-auto object-contain"
               onError={() => setLogoError(true)}
+              priority
             />
           ) : (
             <div className="flex items-center gap-2">

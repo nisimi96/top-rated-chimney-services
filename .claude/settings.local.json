@@ -29,7 +29,11 @@
       "Bash(node scripts/validate-config.js:*)",
       "Bash(git restore:*)",
       "Bash(find:*)",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(node optimize-media.js:*)",
+      "Skill(accessibility)",
+      "Skill(seo)"
     ],
     "deny": [],
     "ask": []
