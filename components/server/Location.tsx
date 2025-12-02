@@ -13,7 +13,7 @@ const Location: React.FC = () => {
             <div className="bg-gray-100 rounded-2xl overflow-hidden h-[400px] relative flex items-center justify-center border-2 border-gray-200 shadow-lg">
               {/* Static Atlanta Map */}
               <img
-                src="/images/atlanta-map.png"
+                src="/images/atlanta-map.webp"
                 alt="Atlanta and surrounding service areas map"
                 className="w-full h-full object-cover"
               />

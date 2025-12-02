@@ -33,7 +33,11 @@
       "Bash(powershell -Command:*)",
       "Bash(node optimize-media.js:*)",
       "Skill(accessibility)",
-      "Skill(seo)"
+      "Skill(seo)",
+      "Bash(magick convert:*)",
+      "Bash(cwebp:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(node -e:*)"
     ],
     "deny": [],
     "ask": []
