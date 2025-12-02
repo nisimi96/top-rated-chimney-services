@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Navigation } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 
@@ -12,10 +13,12 @@ const Location: React.FC = () => {
           <div className="w-full md:w-1/2">
             <div className="bg-gray-100 rounded-2xl overflow-hidden h-[400px] relative flex items-center justify-center border-2 border-gray-200 shadow-lg">
               {/* Static Atlanta Map */}
-              <img
+              <Image
                 src="/images/atlanta-map.webp"
                 alt="Atlanta and surrounding service areas map"
+                fill
                 className="w-full h-full object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Overlay Card - Atlanta Focus */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
