@@ -14,6 +14,23 @@ const nextConfig: NextConfig = {
   // Production optimizations
   productionBrowserSourceMaps: false,
 
+  // Disable legacy JavaScript polyfills - target modern browsers only
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
+
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+      };
+    }
+    return config;
+  },
+
   // Headers for static content caching
   async headers() {
     return [
