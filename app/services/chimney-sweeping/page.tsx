@@ -66,7 +66,7 @@ export default function ChimneySweeping() {
       <PageHero
         title="Professional Chimney Sweeping"
         subtitle="Expert creosote removal and deep cleaning for Greater Atlanta homes."
-        bgImage="/images/placeholder.jpg"
+        bgImage="/images/fireplace-image.webp"
       />
 
       <section className="py-16 bg-white">

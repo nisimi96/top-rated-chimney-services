@@ -66,7 +66,7 @@ export default function GasLogs() {
       <PageHero
         title="Gas Logs & Fireplaces"
         subtitle="Installation, repair, and safety services for vented and vent-free gas log sets."
-        bgImage="/images/placeholder.jpg"
+        bgImage="/images/fireplace-image.webp"
       />
 
       <section className="py-12 md:py-20 lg:py-24 bg-white">

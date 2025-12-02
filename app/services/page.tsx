@@ -18,7 +18,7 @@ export default function ServicesIndex() {
       <PageHero
         title="Professional Chimney Services"
         subtitle="Comprehensive cleaning, repair, and inspection services for Greater Atlanta homeowners."
-        bgImage="/images/placeholder.jpg"
+        bgImage="/images/fireplace-image.webp"
       />
 
       {/* Intro Text */}

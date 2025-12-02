@@ -66,7 +66,7 @@ export default function CapInstallation() {
       <PageHero
         title="Chimney Caps & Chase Covers"
         subtitle="Protect your home from water damage and wildlife with high-quality stainless steel installations."
-        bgImage="/images/placeholder.jpg"
+        bgImage="/images/fireplace-image.webp"
       />
 
       <section className="py-12 md:py-20 lg:py-24 bg-white">

@@ -31,7 +31,7 @@ export default function ServiceAreas() {
       <PageHero
         title="Service Areas"
         subtitle="Serving the entire Greater Metro Atlanta Area within a 60-mile radius of Marietta."
-        bgImage="/images/placeholder.jpg"
+        bgImage="/images/fireplace-image.webp"
       />
 
       <InteractiveMap />

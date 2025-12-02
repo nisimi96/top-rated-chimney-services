@@ -66,7 +66,7 @@ export default function ChimneyInspection() {
       <PageHero
         title="Chimney Safety Inspections"
         subtitle="Certified Level 1, 2, & 3 inspections for real estate transactions and annual safety."
-        bgImage="/images/placeholder.jpg"
+        bgImage="/images/fireplace-image.webp"
       />
 
       <section className="py-12 md:py-20 lg:py-24 bg-white">
