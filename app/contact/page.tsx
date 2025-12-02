@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Metadata } from 'next';
 import { Mail, Phone } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';

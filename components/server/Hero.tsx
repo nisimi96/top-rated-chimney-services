@@ -1,4 +1,3 @@
-import React from 'react';
 import { Phone, ShieldCheck, MapPin } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 import VideoBackground from '@/components/client/VideoBackground';

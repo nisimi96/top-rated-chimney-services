@@ -1,4 +1,3 @@
-import React from 'react';
 import { Award, Shield, Star, Users } from 'lucide-react';
 
 const TrustBar: React.FC = () => {

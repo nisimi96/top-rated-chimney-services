@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import { Search, Flame, Hammer, Wind, CheckCircle2, ArrowRight } from 'lucide-react';
 import { ServiceItem } from '@/lib/types';
