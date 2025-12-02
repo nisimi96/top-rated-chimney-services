@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import VideoBackground from '@/components/client/VideoBackground';
 
 interface PageHeroProps {
@@ -35,11 +36,22 @@ const PageHero: React.FC<PageHeroProps> = ({
         />
       ) : (
         <div className="absolute inset-0 z-0">
-          {/* Fallback Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url("${bgImage}")` }}
-          />
+          {/* Fallback Image - Optimized */}
+          {bgImage === '/images/fireplace-image.webp' ? (
+            <Image
+              src={bgImage}
+              alt="Hero background"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url("${bgImage}")` }}
+            />
+          )}
 
           {/* Single Video Background (Legacy Support) */}
           {videoUrl && (
