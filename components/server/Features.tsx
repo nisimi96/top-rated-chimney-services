@@ -98,6 +98,7 @@ const Features: React.FC = () => {
                       fill
                       className="w-full h-full object-cover"
                       priority={index === 0}
+                      loading={index === 0 ? 'eager' : 'lazy'}
                     />
                     {/* Video - loads only on desktop to improve mobile performance */}
                     {!isMobile && (
@@ -123,6 +124,7 @@ const Features: React.FC = () => {
                     fill
                     className="w-full h-full object-cover"
                     priority={index === 0}
+                    loading={index === 0 ? 'eager' : 'lazy'}
                   />
                 )}
               </div>
