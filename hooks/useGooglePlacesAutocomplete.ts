@@ -30,24 +30,15 @@ export const useGooglePlacesAutocomplete = ({
   // Initialize the autocomplete session token with retry logic
   useEffect(() => {
     const initializeSession = () => {
-      console.log('[Autocomplete] Attempting initialization...');
-      console.log('[Autocomplete] window.google exists:', !!window.google);
-      console.log('[Autocomplete] window.google.maps exists:', !!window.google?.maps);
-      console.log('[Autocomplete] window.google.maps.places exists:', !!window.google?.maps?.places);
-
       if (typeof window !== 'undefined' && window.google?.maps?.places) {
         try {
-          console.log('[Autocomplete] Initializing AutocompleteSessionToken...');
           autocompleteSessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
-          console.log('[Autocomplete] Successfully initialized session token');
         } catch (error) {
-          console.error('[Autocomplete] Failed to initialize session token:', error);
           // Retry after 1 second
           setTimeout(initializeSession, 1000);
         }
       } else if (typeof window !== 'undefined') {
         // Google Maps not loaded yet, retry
-        console.log('[Autocomplete] Google Maps not loaded yet, retrying in 500ms...');
         setTimeout(initializeSession, 500);
       }
     };
@@ -55,41 +46,38 @@ export const useGooglePlacesAutocomplete = ({
     initializeSession();
   }, []);
 
-  // Get predictions as user types using AutocompleteSuggestion
+  // Get predictions as user types using AutocompleteService
   useEffect(() => {
-    console.log('[Autocomplete] useEffect triggered, inputValue:', inputValue, 'length:', inputValue?.length);
-
     if (!inputValue || inputValue.length < 2) {
-      console.log('[Autocomplete] Input too short, clearing predictions');
       setPredictions([]);
       setShowPredictions(false);
       return;
     }
 
-    console.log('[Autocomplete] Fetching predictions for input:', inputValue);
-
     if (!window.google?.maps?.places) {
-      console.warn('[Autocomplete] Google Places not initialized yet');
       return;
     }
 
     const fetchPredictions = () => {
       setIsLoading(true);
       try {
+        // Default bounds for Marietta, GA area
+        const defaultBounds = new window.google.maps.LatLngBounds(
+          new window.google.maps.LatLng(33.9410, -84.3680), // Southwest
+          new window.google.maps.LatLng(33.9710, -84.3280)   // Northeast
+        );
+
         const request = {
           input: inputValue,
+          bounds: defaultBounds,
+          componentRestrictions: { country: 'us' },
           sessionToken: autocompleteSessionTokenRef.current,
         };
-
-        console.log('[Autocomplete] Sending AutocompleteService request:', request);
 
         const service = new window.google.maps.places.AutocompleteService();
 
         service.getPlacePredictions(request, (predictions: any[], status: any) => {
-          console.log('[Autocomplete] Received response, status:', status, 'predictions:', predictions);
-
           if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-            console.log('[Autocomplete] Formatting predictions...');
             const formattedPredictions: PlacePrediction[] = predictions.map((prediction: any) => {
               return {
                 place_id: prediction.place_id || '',
@@ -98,17 +86,14 @@ export const useGooglePlacesAutocomplete = ({
                 secondary_text: prediction.secondary_text || '',
               };
             });
-            console.log('[Autocomplete] Formatted predictions:', formattedPredictions);
             setPredictions(formattedPredictions);
             setShowPredictions(true);
           } else {
-            console.warn('[Autocomplete] No predictions found, status:', status);
             setPredictions([]);
           }
           setIsLoading(false);
         });
       } catch (error) {
-        console.error('[Autocomplete] Error fetching predictions:', error);
         setPredictions([]);
         setIsLoading(false);
       }
@@ -124,7 +109,6 @@ export const useGooglePlacesAutocomplete = ({
     // Reset session token for next search
     if (window.google?.maps?.places) {
       autocompleteSessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
-      console.log('[Autocomplete] Session token reset');
     }
   };
 

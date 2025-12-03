@@ -33,12 +33,12 @@ export default function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      address: '',
-      message: '',
+      name: 'Test User',
+      email: 'test@example.com',
+      phone: '7707996264',
+      service: 'Chimney Sweeping',
+      address: '123 Main Street, Atlanta, GA',
+      message: 'This is a test message for the contact form.',
     },
   });
 
