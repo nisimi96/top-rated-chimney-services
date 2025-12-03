@@ -25,12 +25,11 @@ export const useGooglePlacesAutocomplete = ({
   const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showPredictions, setShowPredictions] = useState(false);
-  const autocompleteServiceRef = useRef<any>(null);
-  const sessionTokenRef = useRef<any>(null);
+  const autocompleteSessionTokenRef = useRef<any>(null);
 
-  // Initialize the autocomplete service with retry logic
+  // Initialize the autocomplete session token with retry logic
   useEffect(() => {
-    const initializeAutocomplete = () => {
+    const initializeSession = () => {
       console.log('[Autocomplete] Attempting initialization...');
       console.log('[Autocomplete] window.google exists:', !!window.google);
       console.log('[Autocomplete] window.google.maps exists:', !!window.google?.maps);
@@ -38,26 +37,25 @@ export const useGooglePlacesAutocomplete = ({
 
       if (typeof window !== 'undefined' && window.google?.maps?.places) {
         try {
-          console.log('[Autocomplete] Initializing AutocompleteService...');
-          autocompleteServiceRef.current = new window.google.maps.places.AutocompleteService();
-          sessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
-          console.log('[Autocomplete] Successfully initialized AutocompleteService and session token');
+          console.log('[Autocomplete] Initializing AutocompleteSessionToken...');
+          autocompleteSessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
+          console.log('[Autocomplete] Successfully initialized session token');
         } catch (error) {
-          console.error('[Autocomplete] Failed to initialize autocomplete service:', error);
+          console.error('[Autocomplete] Failed to initialize session token:', error);
           // Retry after 1 second
-          setTimeout(initializeAutocomplete, 1000);
+          setTimeout(initializeSession, 1000);
         }
       } else if (typeof window !== 'undefined') {
         // Google Maps not loaded yet, retry
         console.log('[Autocomplete] Google Maps not loaded yet, retrying in 500ms...');
-        setTimeout(initializeAutocomplete, 500);
+        setTimeout(initializeSession, 500);
       }
     };
 
-    initializeAutocomplete();
+    initializeSession();
   }, []);
 
-  // Get predictions as user types
+  // Get predictions as user types using AutocompleteSuggestion
   useEffect(() => {
     if (!inputValue || inputValue.length < 2) {
       console.log('[Autocomplete] Input too short, clearing predictions');
@@ -67,56 +65,59 @@ export const useGooglePlacesAutocomplete = ({
     }
 
     console.log('[Autocomplete] Fetching predictions for input:', inputValue);
-    console.log('[Autocomplete] Service initialized:', !!autocompleteServiceRef.current);
 
-    if (!autocompleteServiceRef.current) {
-      console.warn('[Autocomplete] Autocomplete service not initialized yet');
+    if (!window.google?.maps?.places) {
+      console.warn('[Autocomplete] Google Places not initialized yet');
       return;
     }
 
-    setIsLoading(true);
-    const request = {
-      input: inputValue,
-      componentRestrictions: {
-        country: 'us',
-      },
-      sessionToken: sessionTokenRef.current,
-    };
+    const fetchPredictions = async () => {
+      setIsLoading(true);
+      try {
+        const request = {
+          input: inputValue,
+          regionCode: 'us',
+          sessionToken: autocompleteSessionTokenRef.current,
+        };
 
-    console.log('[Autocomplete] Sending request:', request);
+        console.log('[Autocomplete] Sending AutocompleteSuggestion request:', request);
 
-    try {
-      autocompleteServiceRef.current.getPlacePredictions(request, (predictions: any[], status: string) => {
-        console.log('[Autocomplete] Received callback with status:', status);
-        console.log('[Autocomplete] Predictions received:', predictions);
-        console.log('[Autocomplete] PlacesServiceStatus.OK value:', window.google?.maps?.places?.PlacesServiceStatus?.OK);
-        console.log('[Autocomplete] Status type:', typeof status);
+        const { AutocompleteSuggestionService } = await window.google.maps.places;
+        const service = new AutocompleteSuggestionService();
 
-        // Handle both string "OK" and the PlacesServiceStatus.OK constant
-        const isOkStatus = status === 'OK' || status === window.google?.maps?.places?.PlacesServiceStatus?.OK;
+        const response = await service.getAutocompletePredictions(request);
 
-        if (isOkStatus && predictions && predictions.length > 0) {
-          console.log('[Autocomplete] Status OK, formatting predictions...');
-          const formattedPredictions: PlacePrediction[] = predictions.map((p) => ({
-            place_id: p.place_id,
-            description: p.description,
-            main_text: p.main_text,
-            secondary_text: p.secondary_text,
-          }));
+        console.log('[Autocomplete] Received response:', response);
+
+        if (response.suggestions && response.suggestions.length > 0) {
+          console.log('[Autocomplete] Formatting suggestions...');
+          const formattedPredictions: PlacePrediction[] = response.suggestions.map((suggestion: any) => {
+            const mainText = suggestion.placePrediction?.text?.text || '';
+            const secondaryText = suggestion.placePrediction?.text?.secondary_text || '';
+
+            return {
+              place_id: suggestion.placePrediction?.placeId || '',
+              description: mainText,
+              main_text: mainText,
+              secondary_text: secondaryText,
+            };
+          });
           console.log('[Autocomplete] Formatted predictions:', formattedPredictions);
           setPredictions(formattedPredictions);
           setShowPredictions(true);
         } else {
-          console.warn('[Autocomplete] No predictions found or status error. Status:', status, 'isOkStatus:', isOkStatus, 'Predictions:', predictions);
+          console.warn('[Autocomplete] No suggestions found');
           setPredictions([]);
         }
+      } catch (error) {
+        console.error('[Autocomplete] Error fetching suggestions:', error);
+        setPredictions([]);
+      } finally {
         setIsLoading(false);
-      });
-    } catch (error) {
-      console.error('[Autocomplete] Error getting predictions:', error);
-      setPredictions([]);
-      setIsLoading(false);
-    }
+      }
+    };
+
+    fetchPredictions();
   }, [inputValue]);
 
   const selectPlace = (placeId: string, description: string) => {
@@ -125,7 +126,8 @@ export const useGooglePlacesAutocomplete = ({
     setShowPredictions(false);
     // Reset session token for next search
     if (window.google?.maps?.places) {
-      sessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
+      autocompleteSessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
+      console.log('[Autocomplete] Session token reset');
     }
   };
 
