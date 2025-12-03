@@ -51,23 +51,23 @@ export default function ContactForm() {
   });
 
   const [showSuccessOnly, setShowSuccessOnly] = useState(false);
-  const addressValue = watch('address');
   const addressInputRef = useRef<HTMLInputElement>(null);
-  const [syncedAddress, setSyncedAddress] = useState('');
-
-  // Sync the watched address value with local state to ensure hook receives updates
-  useEffect(() => {
-    console.log('[ContactForm] Address value from watch:', addressValue);
-    setSyncedAddress(addressValue || '');
-  }, [addressValue]);
+  const [addressInput, setAddressInput] = useState('');
 
   const { predictions, isLoading, showPredictions, setShowPredictions, selectPlace } =
     useGooglePlacesAutocomplete({
-      inputValue: syncedAddress,
+      inputValue: addressInput,
       onPlaceSelect: (address) => {
+        setAddressInput(address);
         setValue('address', address);
       },
     });
+
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setAddressInput(value);
+    setValue('address', value);
+  };
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -234,6 +234,8 @@ export default function ContactForm() {
                 type="text"
                 id="address"
                 placeholder="123 Main Street, City, State 12345"
+                value={addressInput}
+                onChange={handleAddressChange}
                 onFocus={() => setShowPredictions(true)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-red-50"
               />
