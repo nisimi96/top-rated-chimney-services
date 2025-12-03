@@ -84,9 +84,7 @@ export const useGooglePlacesAutocomplete = ({
 
         console.log('[Autocomplete] Sending AutocompleteSuggestion request:', request);
 
-        const { AutocompleteSuggestionService } = await window.google.maps.places;
-        const service = new AutocompleteSuggestionService();
-
+        const service = new window.google.maps.places.AutocompleteSuggestionService();
         const response = await service.getAutocompletePredictions(request);
 
         console.log('[Autocomplete] Received response:', response);
