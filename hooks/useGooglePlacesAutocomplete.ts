@@ -61,15 +61,16 @@ export const useGooglePlacesAutocomplete = ({
     const fetchPredictions = () => {
       setIsLoading(true);
       try {
-        // Default bounds for Marietta, GA area
-        const defaultBounds = new window.google.maps.LatLngBounds(
-          new window.google.maps.LatLng(33.9410, -84.3680), // Southwest
-          new window.google.maps.LatLng(33.9710, -84.3280)   // Northeast
-        );
+        // Use locationRestriction (new recommended parameter) instead of deprecated bounds
+        const mariettaCenter = new window.google.maps.LatLng(33.9560, -84.3480);
+        const radiusInMeters = 5000; // ~3 miles
 
         const request = {
           input: inputValue,
-          bounds: defaultBounds,
+          locationRestriction: {
+            center: mariettaCenter,
+            radius: radiusInMeters,
+          },
           componentRestrictions: { country: 'us' },
           sessionToken: autocompleteSessionTokenRef.current,
         };
