@@ -28,12 +28,25 @@ export const useGooglePlacesAutocomplete = ({
   const autocompleteServiceRef = useRef<any>(null);
   const sessionTokenRef = useRef<any>(null);
 
-  // Initialize the autocomplete service
+  // Initialize the autocomplete service with retry logic
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.google?.maps?.places) {
-      autocompleteServiceRef.current = new window.google.maps.places.AutocompleteService();
-      sessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
-    }
+    const initializeAutocomplete = () => {
+      if (typeof window !== 'undefined' && window.google?.maps?.places) {
+        try {
+          autocompleteServiceRef.current = new window.google.maps.places.AutocompleteService();
+          sessionTokenRef.current = new window.google.maps.places.AutocompleteSessionToken();
+        } catch (error) {
+          console.error('Failed to initialize autocomplete service:', error);
+          // Retry after 1 second
+          setTimeout(initializeAutocomplete, 1000);
+        }
+      } else if (typeof window !== 'undefined') {
+        // Google Maps not loaded yet, retry
+        setTimeout(initializeAutocomplete, 500);
+      }
+    };
+
+    initializeAutocomplete();
   }, []);
 
   // Get predictions as user types
