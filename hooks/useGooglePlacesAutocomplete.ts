@@ -57,6 +57,8 @@ export const useGooglePlacesAutocomplete = ({
 
   // Get predictions as user types using AutocompleteSuggestion
   useEffect(() => {
+    console.log('[Autocomplete] useEffect triggered, inputValue:', inputValue, 'length:', inputValue?.length);
+
     if (!inputValue || inputValue.length < 2) {
       console.log('[Autocomplete] Input too short, clearing predictions');
       setPredictions([]);
