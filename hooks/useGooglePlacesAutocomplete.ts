@@ -73,7 +73,7 @@ export const useGooglePlacesAutocomplete = ({
       return;
     }
 
-    const fetchPredictions = async () => {
+    const fetchPredictions = () => {
       setIsLoading(true);
       try {
         const request = {
@@ -84,31 +84,32 @@ export const useGooglePlacesAutocomplete = ({
         console.log('[Autocomplete] Sending AutocompleteService request:', request);
 
         const service = new window.google.maps.places.AutocompleteService();
-        const response = await service.getPlacePredictions(request);
 
-        console.log('[Autocomplete] Received response:', response);
+        service.getPlacePredictions(request, (predictions: any[], status: any) => {
+          console.log('[Autocomplete] Received response, status:', status, 'predictions:', predictions);
 
-        if (response.predictions && response.predictions.length > 0) {
-          console.log('[Autocomplete] Formatting predictions...');
-          const formattedPredictions: PlacePrediction[] = response.predictions.map((prediction: any) => {
-            return {
-              place_id: prediction.place_id || '',
-              description: prediction.description || '',
-              main_text: prediction.main_text || prediction.description || '',
-              secondary_text: prediction.secondary_text || '',
-            };
-          });
-          console.log('[Autocomplete] Formatted predictions:', formattedPredictions);
-          setPredictions(formattedPredictions);
-          setShowPredictions(true);
-        } else {
-          console.warn('[Autocomplete] No predictions found');
-          setPredictions([]);
-        }
+          if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+            console.log('[Autocomplete] Formatting predictions...');
+            const formattedPredictions: PlacePrediction[] = predictions.map((prediction: any) => {
+              return {
+                place_id: prediction.place_id || '',
+                description: prediction.description || '',
+                main_text: prediction.main_text || prediction.description || '',
+                secondary_text: prediction.secondary_text || '',
+              };
+            });
+            console.log('[Autocomplete] Formatted predictions:', formattedPredictions);
+            setPredictions(formattedPredictions);
+            setShowPredictions(true);
+          } else {
+            console.warn('[Autocomplete] No predictions found, status:', status);
+            setPredictions([]);
+          }
+          setIsLoading(false);
+        });
       } catch (error) {
         console.error('[Autocomplete] Error fetching predictions:', error);
         setPredictions([]);
-      } finally {
         setIsLoading(false);
       }
     };
