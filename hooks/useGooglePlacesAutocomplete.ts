@@ -78,43 +78,35 @@ export const useGooglePlacesAutocomplete = ({
       try {
         const request = {
           input: inputValue,
-          regionCode: 'us',
           sessionToken: autocompleteSessionTokenRef.current,
         };
 
-        console.log('[Autocomplete] Sending AutocompleteSuggestion request:', request);
-        console.log('[Autocomplete] Checking AutocompleteSuggestionService availability...');
-        console.log('[Autocomplete] typeof window.google.maps.places.AutocompleteSuggestionService:', typeof window.google.maps.places.AutocompleteSuggestionService);
+        console.log('[Autocomplete] Sending AutocompleteService request:', request);
 
-        const service = new window.google.maps.places.AutocompleteSuggestionService();
-        const response = await service.getAutocompletePredictions(request);
+        const service = new window.google.maps.places.AutocompleteService();
+        const response = await service.getPlacePredictions(request);
 
         console.log('[Autocomplete] Received response:', response);
 
-        if (response.suggestions && response.suggestions.length > 0) {
-          console.log('[Autocomplete] Formatting suggestions...');
-          const formattedPredictions: PlacePrediction[] = response.suggestions.map((suggestion: any) => {
-            const mainText = suggestion.placePrediction?.text?.text || '';
-            const secondaryText = suggestion.placePrediction?.text?.secondary_text || '';
-
+        if (response.predictions && response.predictions.length > 0) {
+          console.log('[Autocomplete] Formatting predictions...');
+          const formattedPredictions: PlacePrediction[] = response.predictions.map((prediction: any) => {
             return {
-              place_id: suggestion.placePrediction?.placeId || '',
-              description: mainText,
-              main_text: mainText,
-              secondary_text: secondaryText,
+              place_id: prediction.place_id || '',
+              description: prediction.description || '',
+              main_text: prediction.main_text || prediction.description || '',
+              secondary_text: prediction.secondary_text || '',
             };
           });
           console.log('[Autocomplete] Formatted predictions:', formattedPredictions);
           setPredictions(formattedPredictions);
           setShowPredictions(true);
         } else {
-          console.warn('[Autocomplete] No suggestions found');
+          console.warn('[Autocomplete] No predictions found');
           setPredictions([]);
         }
       } catch (error) {
-        console.error('[Autocomplete] Error fetching suggestions:', error);
-        console.error('[Autocomplete] window.google.maps:', window.google?.maps);
-        console.error('[Autocomplete] window.google.maps.places:', window.google?.maps?.places);
+        console.error('[Autocomplete] Error fetching predictions:', error);
         setPredictions([]);
       } finally {
         setIsLoading(false);
