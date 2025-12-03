@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/client/Header';
 import Footer from '@/components/server/Footer';
 import FloatingCTA from '@/components/client/FloatingCTA';
-import SessionProvider from '@/components/client/SessionProvider';
 import { localBusinessSchema } from '@/lib/schemas';
 import '@/styles/globals.css';
 
@@ -52,21 +51,19 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning className="min-h-screen bg-white font-sans text-slate-900 selection:bg-brand-red selection:text-white flex flex-col">
-        <SessionProvider>
-          {/* Skip to main content link for accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:bg-brand-red focus:text-white focus:px-4 focus:py-2"
-          >
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" className="grow">
-            {children}
-          </main>
-          <Footer />
-          <FloatingCTA />
-        </SessionProvider>
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:bg-brand-red focus:text-white focus:px-4 focus:py-2"
+        >
+          Skip to main content
+        </a>
+        <Header />
+        <main id="main-content" className="grow">
+          {children}
+        </main>
+        <Footer />
+        <FloatingCTA />
       </body>
     </html>
   );
