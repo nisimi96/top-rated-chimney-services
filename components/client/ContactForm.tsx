@@ -53,10 +53,17 @@ export default function ContactForm() {
   const [showSuccessOnly, setShowSuccessOnly] = useState(false);
   const addressValue = watch('address');
   const addressInputRef = useRef<HTMLInputElement>(null);
+  const [syncedAddress, setSyncedAddress] = useState('');
+
+  // Sync the watched address value with local state to ensure hook receives updates
+  useEffect(() => {
+    console.log('[ContactForm] Address value from watch:', addressValue);
+    setSyncedAddress(addressValue || '');
+  }, [addressValue]);
 
   const { predictions, isLoading, showPredictions, setShowPredictions, selectPlace } =
     useGooglePlacesAutocomplete({
-      inputValue: addressValue,
+      inputValue: syncedAddress,
       onPlaceSelect: (address) => {
         setValue('address', address);
       },
