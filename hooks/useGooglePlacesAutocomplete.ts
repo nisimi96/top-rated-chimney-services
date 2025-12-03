@@ -83,6 +83,8 @@ export const useGooglePlacesAutocomplete = ({
         };
 
         console.log('[Autocomplete] Sending AutocompleteSuggestion request:', request);
+        console.log('[Autocomplete] Checking AutocompleteSuggestionService availability...');
+        console.log('[Autocomplete] typeof window.google.maps.places.AutocompleteSuggestionService:', typeof window.google.maps.places.AutocompleteSuggestionService);
 
         const service = new window.google.maps.places.AutocompleteSuggestionService();
         const response = await service.getAutocompletePredictions(request);
@@ -111,6 +113,8 @@ export const useGooglePlacesAutocomplete = ({
         }
       } catch (error) {
         console.error('[Autocomplete] Error fetching suggestions:', error);
+        console.error('[Autocomplete] window.google.maps:', window.google?.maps);
+        console.error('[Autocomplete] window.google.maps.places:', window.google?.maps?.places);
         setPredictions([]);
       } finally {
         setIsLoading(false);
