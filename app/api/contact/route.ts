@@ -50,7 +50,7 @@ Sent from Top Rated Chimney Services Contact Form
     await transporter.sendMail({
       from: process.env.GMAIL_USER,
       to: companyEmail,
-      subject: 'New Customer Contact',
+      subject: 'new customer (chimney) website',
       text: emailContent,
       replyTo: validatedData.email,
     });
