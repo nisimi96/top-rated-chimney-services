@@ -49,6 +49,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
+        {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
+          <script
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
+            async
+            defer
+          />
+        )}
       </head>
       <body suppressHydrationWarning className="min-h-screen bg-white font-sans text-slate-900 selection:bg-brand-red selection:text-white flex flex-col">
         {/* Skip to main content link for accessibility */}
