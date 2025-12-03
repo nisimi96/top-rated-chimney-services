@@ -90,8 +90,12 @@ export const useGooglePlacesAutocomplete = ({
         console.log('[Autocomplete] Received callback with status:', status);
         console.log('[Autocomplete] Predictions received:', predictions);
         console.log('[Autocomplete] PlacesServiceStatus.OK value:', window.google?.maps?.places?.PlacesServiceStatus?.OK);
+        console.log('[Autocomplete] Status type:', typeof status);
 
-        if (status === window.google?.maps?.places?.PlacesServiceStatus?.OK && predictions) {
+        // Handle both string "OK" and the PlacesServiceStatus.OK constant
+        const isOkStatus = status === 'OK' || status === window.google?.maps?.places?.PlacesServiceStatus?.OK;
+
+        if (isOkStatus && predictions && predictions.length > 0) {
           console.log('[Autocomplete] Status OK, formatting predictions...');
           const formattedPredictions: PlacePrediction[] = predictions.map((p) => ({
             place_id: p.place_id,
@@ -103,7 +107,7 @@ export const useGooglePlacesAutocomplete = ({
           setPredictions(formattedPredictions);
           setShowPredictions(true);
         } else {
-          console.warn('[Autocomplete] No predictions found or status error. Status:', status, 'Predictions:', predictions);
+          console.warn('[Autocomplete] No predictions found or status error. Status:', status, 'isOkStatus:', isOkStatus, 'Predictions:', predictions);
           setPredictions([]);
         }
         setIsLoading(false);
