@@ -57,7 +57,10 @@ export const useGooglePlacesAutocomplete = ({
       return;
     }
 
-    if (!autocompleteServiceRef.current) return;
+    if (!autocompleteServiceRef.current) {
+      console.warn('Autocomplete service not initialized yet');
+      return;
+    }
 
     setIsLoading(true);
     const request = {
@@ -68,21 +71,28 @@ export const useGooglePlacesAutocomplete = ({
       sessionToken: sessionTokenRef.current,
     };
 
-    autocompleteServiceRef.current.getPlacePredictions(request, (predictions: any[], status: string) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-        const formattedPredictions: PlacePrediction[] = predictions.map((p) => ({
-          place_id: p.place_id,
-          description: p.description,
-          main_text: p.main_text,
-          secondary_text: p.secondary_text,
-        }));
-        setPredictions(formattedPredictions);
-        setShowPredictions(true);
-      } else {
-        setPredictions([]);
-      }
+    try {
+      autocompleteServiceRef.current.getPlacePredictions(request, (predictions: any[], status: string) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+          const formattedPredictions: PlacePrediction[] = predictions.map((p) => ({
+            place_id: p.place_id,
+            description: p.description,
+            main_text: p.main_text,
+            secondary_text: p.secondary_text,
+          }));
+          setPredictions(formattedPredictions);
+          setShowPredictions(true);
+        } else {
+          console.warn('No predictions found or status error:', status);
+          setPredictions([]);
+        }
+        setIsLoading(false);
+      });
+    } catch (error) {
+      console.error('Error getting predictions:', error);
+      setPredictions([]);
       setIsLoading(false);
-    });
+    }
   }, [inputValue]);
 
   const selectPlace = (placeId: string, description: string) => {
