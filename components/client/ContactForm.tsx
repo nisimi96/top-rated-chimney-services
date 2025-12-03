@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Check } from 'lucide-react';
 
 interface ContactFormData {
   name: string;
@@ -46,6 +47,8 @@ export default function ContactForm() {
     message: '',
   });
 
+  const [showSuccessOnly, setShowSuccessOnly] = useState(false);
+
   const onSubmit = async (data: ContactFormData) => {
     try {
       setSubmitStatus({ type: null, message: '' });
@@ -68,11 +71,13 @@ export default function ContactForm() {
         message: 'Thank you! Your message has been sent. We will get back to you within 24 hours.',
       });
       reset();
+      setShowSuccessOnly(true);
 
-      // Clear success message after 5 seconds
+      // Reset form after 8 seconds
       setTimeout(() => {
+        setShowSuccessOnly(false);
         setSubmitStatus({ type: null, message: '' });
-      }, 5000);
+      }, 8000);
     } catch (error) {
       setSubmitStatus({
         type: 'error',
@@ -83,23 +88,42 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-3xl mx-auto bg-gray-50 rounded-xl p-8 md:p-12">
-      <h2 className="text-3xl font-bold text-brand-black mb-8">
-        Send us a Message
-      </h2>
-
-      {submitStatus.type && (
-        <div
-          className={`mb-6 p-4 rounded-lg ${
-            submitStatus.type === 'success'
-              ? 'bg-green-50 border border-green-200 text-green-800'
-              : 'bg-red-50 border border-red-200 text-red-800'
-          }`}
-        >
-          {submitStatus.message}
+      {showSuccessOnly ? (
+        <div className="flex flex-col items-center justify-center py-16 animate-fadeIn">
+          <div className="mb-6 flex items-center justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-green-400 rounded-full animate-pulse opacity-25"></div>
+              <div className="relative bg-green-50 rounded-full p-4">
+                <Check className="text-green-600 animate-bounce" size={48} />
+              </div>
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-brand-black text-center mb-4">
+            Message Sent!
+          </h2>
+          <p className="text-lg text-gray-600 text-center max-w-2xl">
+            Thank you! Your message has been sent. We will get back to you within 24 hours.
+          </p>
         </div>
-      )}
+      ) : (
+        <>
+          <h2 className="text-3xl font-bold text-brand-black mb-8">
+            Send us a Message
+          </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {submitStatus.type && (
+            <div
+              className={`mb-6 p-4 rounded-lg animate-slideDown ${
+                submitStatus.type === 'success'
+                  ? 'bg-green-50 border border-green-200 text-green-800'
+                  : 'bg-red-50 border border-red-200 text-red-800'
+              }`}
+            >
+              {submitStatus.message}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 animate-fadeIn">
         {/* Name */}
           <div>
             <label htmlFor="name" className="block text-sm font-bold text-brand-black mb-2">
@@ -248,10 +272,12 @@ export default function ContactForm() {
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
 
-        <p className="text-center text-gray-600 text-sm">
-          * Required fields
-        </p>
-      </form>
+            <p className="text-center text-gray-600 text-sm">
+              * Required fields
+            </p>
+          </form>
+        </>
+      )}
     </div>
   );
 }
