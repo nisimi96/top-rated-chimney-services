@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Search, Flame, Hammer, Wind, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Search, Flame, Hammer, Wind, CheckCircle2, ArrowRight, Phone } from 'lucide-react';
 import { ServiceItem } from '@/lib/types';
 import { COMPANY_INFO } from '@/lib/constants';
 
@@ -83,9 +83,10 @@ const Services: React.FC = () => {
             <p className="text-gray-300 mb-8">We handle all chimney and fireplace related needs.</p>
             <a
               href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="w-full bg-brand-red text-white py-4 rounded-lg font-bold hover:bg-white hover:text-brand-red transition-colors shadow-lg hover:shadow-xl active:scale-95"
+              className="w-full bg-brand-red text-white py-4 rounded-lg font-bold hover:bg-white hover:text-brand-red transition-colors shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
             >
-              Call an Expert
+              <Phone size={20} />
+              <span>Call an Expert</span>
             </a>
           </div>
         </div>
