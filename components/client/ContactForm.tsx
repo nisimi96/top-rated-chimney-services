@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Check, MapPin } from 'lucide-react';
-import { useGooglePlacesAutocomplete } from '@/hooks/useGooglePlacesAutocomplete';
+import { Check } from 'lucide-react';
 
 interface ContactFormData {
   name: string;
@@ -28,8 +27,6 @@ export default function ContactForm() {
     register,
     handleSubmit,
     reset,
-    watch,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>();
 
@@ -42,23 +39,6 @@ export default function ContactForm() {
   });
 
   const [showSuccessOnly, setShowSuccessOnly] = useState(false);
-  const addressInputRef = useRef<HTMLInputElement>(null);
-  const [addressInput, setAddressInput] = useState('');
-
-  const { predictions, isLoading, showPredictions, setShowPredictions, selectPlace } =
-    useGooglePlacesAutocomplete({
-      inputValue: addressInput,
-      onPlaceSelect: (address) => {
-        setAddressInput(address);
-        setValue('address', address);
-      },
-    });
-
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setAddressInput(value);
-    setValue('address', value);
-  };
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -204,65 +184,24 @@ export default function ContactForm() {
             )}
           </div>
 
-          {/* Address with Google Places Autocomplete */}
+          {/* Address */}
           <div>
             <label htmlFor="address" className="block text-sm font-bold text-brand-black mb-2">
               Property Address *
             </label>
-            <div className="relative">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                <MapPin size={18} />
-              </div>
-              <input
-                {...register('address', {
-                  required: 'Property address is required',
-                  minLength: {
-                    value: 5,
-                    message: 'Please enter a valid address',
-                  },
-                })}
-                ref={addressInputRef}
-                type="text"
-                id="address"
-                placeholder="123 Main Street, City, State 12345"
-                value={addressInput}
-                onChange={handleAddressChange}
-                onFocus={() => setShowPredictions(true)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-red-50"
-              />
-              {/* Autocomplete Dropdown */}
-              {showPredictions && predictions.length > 0 && (
-                <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
-                  {isLoading && (
-                    <div className="px-4 py-3 text-gray-500 text-sm">
-                      Loading suggestions...
-                    </div>
-                  )}
-                  {predictions.map((prediction) => (
-                    <button
-                      key={prediction.place_id}
-                      type="button"
-                      onClick={() => selectPlace(prediction.place_id, prediction.description)}
-                      className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors"
-                    >
-                      <div className="flex items-start gap-3">
-                        <MapPin className="text-brand-red shrink-0 mt-0.5" size={16} />
-                        <div className="min-w-0">
-                          <div className="font-medium text-gray-900 truncate">
-                            {prediction.main_text}
-                          </div>
-                          {prediction.secondary_text && (
-                            <div className="text-sm text-gray-500 truncate">
-                              {prediction.secondary_text}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            <input
+              {...register('address', {
+                required: 'Property address is required',
+                minLength: {
+                  value: 5,
+                  message: 'Please enter a valid address',
+                },
+              })}
+              type="text"
+              id="address"
+              placeholder="123 Main Street, City, State 12345"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-red-50"
+            />
             {errors.address && (
               <p className="text-red-600 text-sm mt-1">{errors.address.message}</p>
             )}
