@@ -66,9 +66,9 @@ const Location: React.FC = () => {
             <div className="mt-10">
               <a
                 href={`tel:${COMPANY_INFO.phoneTel}`}
-                className="inline-block bg-brand-black text-white px-8 py-4 rounded-lg font-bold hover:bg-gray-800 transition-colors"
+                className="inline-block bg-brand-red text-white px-8 py-4 rounded-lg font-bold hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl active:scale-95"
               >
-                Get Directions / Call Us
+                Call Us Now
               </a>
             </div>
           </div>

@@ -49,8 +49,8 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-bold mb-4">Worried about your chimney safety?</h2>
           <p className="text-lg opacity-90 mb-6 max-w-2xl mx-auto">Don't wait until smoke fills your living room. Our schedule fills up fast during the season.</p>
-          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-colors shadow-lg">
-            Book Inspection Now
+          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl active:scale-95">
+            Call Now to Book Inspection
           </a>
         </div>
       </section>
