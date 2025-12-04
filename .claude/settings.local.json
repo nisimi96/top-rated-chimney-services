@@ -37,7 +37,12 @@
       "Bash(magick convert:*)",
       "Bash(cwebp:*)",
       "Bash(ffmpeg:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(timeout 10 powershell:*)",
+      "Bash(timeout 15 powershell:*)",
+      "Bash(timeout 5 powershell:*)",
+      "Bash(Remove-Item -Path '.\\.next' -Recurse -Force -ErrorAction SilentlyContinue)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

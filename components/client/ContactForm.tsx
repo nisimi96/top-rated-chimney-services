@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Check } from 'lucide-react';
+import { Check, Mail, Phone } from 'lucide-react';
 
 interface ContactFormData {
   name: string;
@@ -11,6 +11,7 @@ interface ContactFormData {
   service: string;
   address: string;
   message: string;
+  contactPreference: 'email' | 'phone';
 }
 
 const services = [
@@ -39,6 +40,7 @@ export default function ContactForm() {
   });
 
   const [showSuccessOnly, setShowSuccessOnly] = useState(false);
+  const [contactPreference, setContactPreference] = useState<'email' | 'phone' | ''>('');
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -228,6 +230,67 @@ export default function ContactForm() {
             </select>
             {errors.service && (
               <p className="text-red-600 text-sm mt-1">{errors.service.message}</p>
+            )}
+          </div>
+
+          {/* Contact Preference */}
+          <div>
+            <label className="block text-sm font-bold text-brand-black mb-4">
+              How would you prefer we contact you? *
+            </label>
+            <div className="grid grid-cols-2 gap-4">
+              <label
+                htmlFor="contact-email"
+                className="relative cursor-pointer group"
+              >
+                <input
+                  {...register('contactPreference', {
+                    required: 'Please select a contact preference',
+                  })}
+                  type="radio"
+                  id="contact-email"
+                  value="email"
+                  className="sr-only peer"
+                  onChange={(e) => setContactPreference(e.target.value as 'email' | 'phone')}
+                />
+                <div className="p-4 border-2 border-gray-200 rounded-lg transition-all duration-200 peer-checked:border-brand-red peer-checked:bg-red-50 hover:border-gray-300 flex flex-col items-center gap-3 group-hover:shadow-md">
+                  <Mail className="w-6 h-6 text-gray-600 peer-checked:text-brand-red transition-colors" />
+                  <span className="font-semibold text-gray-700 peer-checked:text-brand-red transition-colors">
+                    Email
+                  </span>
+                  <span className="text-xs text-gray-500 peer-checked:text-brand-red/70">
+                    Response within 24 hours
+                  </span>
+                </div>
+              </label>
+
+              <label
+                htmlFor="contact-phone"
+                className="relative cursor-pointer group"
+              >
+                <input
+                  {...register('contactPreference', {
+                    required: 'Please select a contact preference',
+                  })}
+                  type="radio"
+                  id="contact-phone"
+                  value="phone"
+                  className="sr-only peer"
+                  onChange={(e) => setContactPreference(e.target.value as 'email' | 'phone')}
+                />
+                <div className="p-4 border-2 border-gray-200 rounded-lg transition-all duration-200 peer-checked:border-brand-red peer-checked:bg-red-50 hover:border-gray-300 flex flex-col items-center gap-3 group-hover:shadow-md">
+                  <Phone className="w-6 h-6 text-gray-600 peer-checked:text-brand-red transition-colors" />
+                  <span className="font-semibold text-gray-700 peer-checked:text-brand-red transition-colors">
+                    Phone Call
+                  </span>
+                  <span className="text-xs text-gray-500 peer-checked:text-brand-red/70">
+                    Same day service
+                  </span>
+                </div>
+              </label>
+            </div>
+            {errors.contactPreference && (
+              <p className="text-red-600 text-sm mt-2">{errors.contactPreference.message}</p>
             )}
           </div>
 

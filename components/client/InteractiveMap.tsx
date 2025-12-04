@@ -113,7 +113,7 @@ const InteractiveMap: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="bg-gray-100 rounded-2xl overflow-hidden h-[500px] relative flex items-center justify-center border-2 border-gray-200 shadow-lg">
               <img
-                src="/images/atlanta-map.png"
+                src="/images/atlanta-map.webp"
                 alt="Atlanta and surrounding service areas map"
                 className="w-full h-full object-cover"
               />

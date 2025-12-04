@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { Phone, Mail } from 'lucide-react';
+import { COMPANY_INFO } from '@/lib/constants';
 import VideoBackground from '@/components/client/VideoBackground';
 
 interface PageHeroProps {
@@ -24,7 +27,7 @@ const PageHero: React.FC<PageHeroProps> = ({
   ];
 
   return (
-    <section className="relative h-[300px] md:h-[400px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[450px] md:h-[550px] flex items-center justify-center overflow-hidden">
       {/* Video Background with Rotation or Single Video */}
       {videos || !videoUrl ? (
         <VideoBackground
@@ -76,10 +79,26 @@ const PageHero: React.FC<PageHeroProps> = ({
           {title}
         </h1>
         {subtitle && (
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow-md">
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow-md mb-8">
             {subtitle}
           </p>
         )}
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+          <a
+            href={`tel:${COMPANY_INFO.phoneTel}`}
+            className="flex items-center justify-center gap-3 bg-brand-red text-white text-lg md:text-xl font-bold px-8 py-4 rounded-lg shadow-xl hover:bg-red-700 transition-all hover:scale-105 active:scale-95 border-2 border-transparent hover:border-red-400"
+          >
+            <Phone size={24} />
+            <span>Call {COMPANY_INFO.phoneDisplay}</span>
+          </a>
+          <Link
+            href="/contact"
+            className="flex items-center justify-center gap-3 bg-white text-brand-red text-lg md:text-xl font-bold px-8 py-4 rounded-lg shadow-xl hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 border-2 border-transparent hover:border-red-400"
+          >
+            <Mail size={24} />
+            <span>Send us an Email</span>
+          </Link>
+        </div>
       </div>
 
     </section>

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { Mail } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 
 const Footer: React.FC = () => {
@@ -26,7 +28,14 @@ const Footer: React.FC = () => {
           </div>
           <div className="text-center md:text-right">
             <p className="font-bold text-2xl mb-2 text-brand-red">{COMPANY_INFO.phoneDisplay}</p>
-            <p className="text-gray-400">{COMPANY_INFO.fullAddress}</p>
+            <p className="text-gray-400 mb-4">{COMPANY_INFO.fullAddress}</p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-brand-red text-white font-bold px-6 py-3 rounded-lg hover:bg-red-700 transition-all hover:scale-105 active:scale-95 border-2 border-transparent hover:border-red-400"
+            >
+              <Mail size={20} />
+              <span>Send us an Email</span>
+            </Link>
           </div>
         </div>
         <div className="text-center text-gray-500 text-sm">

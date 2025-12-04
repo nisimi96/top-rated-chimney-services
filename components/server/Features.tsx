@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { COMPANY_INFO } from '@/lib/constants';
 
 const Features: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -180,7 +181,7 @@ const Features: React.FC = () => {
         {/* CTA Button */}
         <div className="text-center mt-8">
           <a
-            href="tel:7707996264"
+            href={`tel:${COMPANY_INFO.phoneTel}`}
             className="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold text-base hover:bg-red-700 transition-colors shadow-lg"
           >
             Get Your Custom Quote

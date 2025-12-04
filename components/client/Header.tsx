@@ -38,27 +38,27 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo Section */}
-        <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+        <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
           {!logoError ? (
             <Image
               src="/images/top-rated-logo.png"
               alt={COMPANY_INFO.name}
               width={96}
               height={96}
-              className="h-20 md:h-24 w-auto object-contain"
+              className="h-16 md:h-20 lg:h-24 w-auto object-contain"
               onError={() => setLogoError(true)}
               priority
             />
           ) : (
             <div className="flex items-center gap-2">
               <div className="text-brand-red">
-                <Flame size={32} strokeWidth={2.5} fill="#E31837" className="text-brand-red" />
+                <Flame size={24} strokeWidth={2.5} fill="#E31837" className="text-brand-red md:w-8 md:h-8" />
               </div>
               <div className="leading-tight">
-                <div className="text-brand-black font-black text-xl md:text-2xl tracking-tighter">
+                <div className="text-brand-black font-black text-lg md:text-xl lg:text-2xl tracking-tighter">
                   TOP RATED
                 </div>
-                <div className="text-brand-red font-bold text-sm md:text-base tracking-wide -mt-1">
+                <div className="text-brand-red font-bold text-xs md:text-sm lg:text-base tracking-wide -mt-1">
                   CHIMNEY SERVICES
                 </div>
               </div>
@@ -67,13 +67,13 @@ const Header: React.FC = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex lg:flex items-center gap-6">
-          <Link href="/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Home</Link>
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 flex-1 justify-center px-4">
+          <Link href="/" className="text-brand-black font-bold hover:text-brand-red transition-colors text-sm lg:text-base">Home</Link>
 
           {/* Services Dropdown */}
           <div className="relative group">
             <button
-              className="text-brand-black font-bold hover:text-brand-red transition-colors flex items-center gap-1"
+              className="text-brand-black font-bold hover:text-brand-red transition-colors flex items-center gap-1 text-sm lg:text-base"
               aria-label="Services submenu"
               aria-expanded="false"
             >
@@ -93,28 +93,28 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          <Link href="/about/" className="text-brand-black font-bold hover:text-brand-red transition-colors">About</Link>
-          <Link href="/service-areas/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Service Areas</Link>
-          <Link href="/contact/" className="text-brand-black font-bold hover:text-brand-red transition-colors">Contact</Link>
+          <Link href="/about/" className="text-brand-black font-bold hover:text-brand-red transition-colors text-sm lg:text-base">About</Link>
+          <Link href="/service-areas/" className="text-brand-black font-bold hover:text-brand-red transition-colors text-sm lg:text-base">Service Areas</Link>
+          <Link href="/contact/" className="text-brand-black font-bold hover:text-brand-red transition-colors text-sm lg:text-base">Contact</Link>
         </nav>
 
         {/* Desktop Call to Action */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-2 xl:gap-4 shrink-0">
           <div className="text-right hidden xl:block">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Need Immediate Service?</p>
             <p className="text-sm font-bold text-brand-black">{COMPANY_INFO.area}</p>
           </div>
           <a
             href={`tel:${COMPANY_INFO.phoneTel}`}
-            className="flex items-center gap-2 bg-brand-red text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-colors shadow-lg animate-pulse hover:animate-none"
+            className="flex items-center gap-2 bg-brand-red text-white px-4 lg:px-6 py-2 lg:py-3 rounded-full font-bold hover:bg-red-700 transition-colors shadow-lg animate-pulse hover:animate-none whitespace-nowrap text-sm lg:text-base"
           >
             <Phone size={20} />
-            <span>{COMPANY_INFO.phoneDisplay}</span>
+            <span className="hidden lg:inline">{COMPANY_INFO.phoneDisplay}</span>
           </a>
         </div>
 
-        {/* Mobile Controls */}
-        <div className="flex md:hidden items-center gap-4">
+        {/* Mobile Controls - Show on tablets and phones (up to 1023px) */}
+        <div className="flex lg:hidden items-center gap-4">
           <a
             href={`tel:${COMPANY_INFO.phoneTel}`}
             className="flex items-center justify-center bg-brand-red text-white p-2 rounded-full shadow-lg"
@@ -135,7 +135,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="flex md:hidden bg-white absolute top-full left-0 right-0 border-t shadow-xl p-4 flex-col gap-4 z-50">
+        <div className="flex lg:hidden bg-white absolute top-full left-0 right-0 border-t shadow-xl p-4 flex-col gap-4 z-50">
           <Link href="/" className="text-lg font-bold py-2 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
 
           {/* Mobile Services Dropdown */}
