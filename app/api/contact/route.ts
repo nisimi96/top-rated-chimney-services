@@ -9,6 +9,9 @@ const contactSchema = z.object({
   service: z.string().min(1, 'Service is required'),
   address: z.string().min(5, 'Valid address is required'),
   message: z.string().min(10, 'Message is required'),
+  contactPreference: z.enum(['email', 'phone'], {
+    errorMap: () => ({ message: 'Contact preference is required' }),
+  }),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -38,6 +41,7 @@ Email: ${validatedData.email}
 Phone: ${validatedData.phone}
 Property Address: ${validatedData.address}
 Service Needed: ${validatedData.service}
+Preferred Contact Method: ${validatedData.contactPreference === 'email' ? 'Email' : 'Phone Call'}
 
 Message:
 ${validatedData.message}
