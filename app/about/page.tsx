@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import PageHero from '@/components/server/PageHero';
 import TrustBar from '@/components/server/TrustBar';
 import Location from '@/components/server/Location';
@@ -41,7 +42,6 @@ export default function About() {
       <PageHero
         title="About Our Team"
         subtitle="Dedicated to protecting Georgia homes through expert chimney care and inspections."
-        bgImage="/images/van.png"
       />
 
       {/* Mission Section */}
@@ -80,10 +80,13 @@ export default function About() {
               </div>
             </div>
             <div className="w-full md:w-1/2">
-              <img
+              <Image
                 src="/images/van.png"
                 alt="Chimney technician at work"
-                className="rounded-2xl shadow-2xl"
+                width={600}
+                height={400}
+                className="rounded-2xl shadow-2xl w-full h-auto"
+                loading="lazy"
               />
             </div>
           </div>

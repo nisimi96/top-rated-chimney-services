@@ -238,7 +238,7 @@ export default function ContactForm() {
             <label className="block text-sm font-bold text-brand-black mb-4">
               How would you prefer we contact you? *
             </label>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-4">
               <label
                 htmlFor="contact-email"
                 className="relative cursor-pointer group"
