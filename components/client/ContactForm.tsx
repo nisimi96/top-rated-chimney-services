@@ -238,10 +238,10 @@ export default function ContactForm() {
             <label className="block text-sm font-bold text-brand-black mb-4">
               How would you prefer we contact you? *
             </label>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <label
                 htmlFor="contact-email"
-                className="relative cursor-pointer group"
+                className="relative cursor-pointer group flex-1"
               >
                 <input
                   {...register('contactPreference', {
@@ -266,7 +266,7 @@ export default function ContactForm() {
 
               <label
                 htmlFor="contact-phone"
-                className="relative cursor-pointer group"
+                className="relative cursor-pointer group flex-1"
               >
                 <input
                   {...register('contactPreference', {
