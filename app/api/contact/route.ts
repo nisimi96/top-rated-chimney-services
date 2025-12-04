@@ -9,9 +9,7 @@ const contactSchema = z.object({
   service: z.string().min(1, 'Service is required'),
   address: z.string().min(5, 'Valid address is required'),
   message: z.string().min(10, 'Message is required'),
-  contactPreference: z.enum(['email', 'phone'], {
-    errorMap: () => ({ message: 'Contact preference is required' }),
-  }),
+  contactPreference: z.enum(['email', 'phone']).catch('email'),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
