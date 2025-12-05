@@ -1,4 +1,4 @@
-import { Phone, ShieldCheck, MapPin, Mail } from 'lucide-react';
+import { Phone, ShieldCheck, MapPin, Calendar } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 import VideoBackground from '@/components/client/VideoBackground';
 
@@ -47,8 +47,8 @@ const Hero: React.FC = () => {
               href="/contact"
               className="flex items-center justify-center gap-3 bg-white text-brand-red text-xl md:text-2xl font-bold px-8 py-5 rounded-lg shadow-xl hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 border-2 border-transparent hover:border-red-400"
             >
-              <Mail size={28} />
-              <span>Send us an Email</span>
+              <Calendar size={28} />
+              <span>Book Now</span>
             </a>
           </div>
 

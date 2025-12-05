@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Mail, Phone } from 'lucide-react';
+import { Calendar, Phone } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 import ContactForm from '@/components/client/ContactForm';
 
@@ -69,10 +69,10 @@ export default function ContactPage() {
 
             <div className="bg-gray-50 rounded-xl p-8 border-l-4 border-brand-red">
               <div className="flex items-center gap-4 mb-4">
-                <Mail className="text-brand-red" size={28} aria-hidden="true" />
-                <h3 className="text-xl font-bold text-brand-black">Email Us</h3>
+                <Calendar className="text-brand-red" size={28} aria-hidden="true" />
+                <h3 className="text-xl font-bold text-brand-black">Book Now</h3>
               </div>
-              <p className="text-gray-600 mb-2">Response within 24 hours</p>
+              <p className="text-gray-600 mb-2">Schedule your inspection today</p>
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
                 className="text-brand-red font-bold text-lg hover:underline"

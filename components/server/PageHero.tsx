@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail } from 'lucide-react';
+import { Phone, Calendar } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
 import VideoBackground from '@/components/client/VideoBackground';
 
@@ -95,8 +95,8 @@ const PageHero: React.FC<PageHeroProps> = ({
             href="/contact"
             className="flex items-center justify-center gap-3 bg-white text-brand-red text-lg md:text-xl font-bold px-8 py-4 rounded-lg shadow-xl hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 border-2 border-transparent hover:border-red-400"
           >
-            <Mail size={24} />
-            <span>Send us an Email</span>
+            <Calendar size={24} />
+            <span>Book Now</span>
           </Link>
         </div>
       </div>
